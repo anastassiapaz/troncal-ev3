@@ -129,75 +129,63 @@ new Chart(document.getElementById("dispersion"), {
     },
 });
 
-// ── Segundo gráfico: arancel promedio por nivel de acreditación ──
-// Pregunta: ¿Cuánto paga en promedio un estudiante de Diseño
-// según el nivel de acreditación de su universidad?
+// ── Segundo gráfico: gratuidad por nivel de acreditación ──
+// Pregunta: ¿Qué proporción de programas de Diseño ofrece
+// gratuidad según el nivel de acreditación de su universidad?
 
-const rawData = [
-    { acred: 3, arancel: 4210000 },
-    { acred: 3, arancel: 4030000 },
-    { acred: 3, arancel: 4210000 },
-    { acred: 4, arancel: 4277000 },
-    { acred: 4, arancel: 4814000 },
-    { acred: 4, arancel: 4814000 },
-    { acred: 4, arancel: 4814000 },
-    { acred: 4, arancel: 4763300 },
-    { acred: 4, arancel: 4814000 },
-    { acred: 4, arancel: 4814000 },
-    { acred: 4, arancel: 4891000 },
-    { acred: 5, arancel: 7200000 },
-    { acred: 5, arancel: 5276000 },
-    { acred: 5, arancel: 4071000 },
-    { acred: 5, arancel: 4730000 },
-    { acred: 5, arancel: 4305000 },
-    { acred: 5, arancel: 7320000 },
-    { acred: 5, arancel: 4730000 },
-    { acred: 5, arancel: 7320000 },
-    { acred: 5, arancel: 4307000 },
-    { acred: 5, arancel: 5120000 },
-    { acred: 5, arancel: 4434000 },
-    { acred: 5, arancel: 7214218 },
-    { acred: 5, arancel: 5900000 },
-    { acred: 6, arancel: 10364360 },
-    { acred: 6, arancel: 5887000 },
-    { acred: 6, arancel: 5887000 },
-    { acred: 6, arancel: 5713000 },
-    { acred: 6, arancel: 7136000 },
-    { acred: 6, arancel: 5069000 },
-    { acred: 6, arancel: 7148000 },
-    { acred: 6, arancel: 7065000 },
-    { acred: 6, arancel: 9754692 },
-    { acred: 6, arancel: 6056038 },
-    { acred: 6, arancel: 7597000 },
-    { acred: 6, arancel: 6555000 },
-    { acred: 6, arancel: 6000000 },
-    { acred: 6, arancel: 9754692 },
-    { acred: 6, arancel: 5180000 },
-    { acred: 7, arancel: 6486700 },
-    { acred: 7, arancel: 6552000 },
-    { acred: 7, arancel: 8080000 },
-    { acred: 7, arancel: 6915000 },
-    { acred: 7, arancel: 4989000 },
-    { acred: 7, arancel: 5492400 },
+const gratuidad = [
+    { acred: 3, gratuidad: false }, // DISEÑO DE IMAGEN - UNIACC
+    { acred: 3, gratuidad: false }, // DISEÑO DE INTERIORES - UNIACC
+    { acred: 3, gratuidad: true  }, // DISEÑO GRÁFICO MULTIMEDIA - UNIACC (Sí)
+    { acred: 4, gratuidad: false }, // DISEÑO - U. VIÑA DEL MAR
+    { acred: 4, gratuidad: false }, // DISEÑO EXP. INMERSIVAS - U. GABRIELA MISTRAL
+    { acred: 4, gratuidad: false }, // DISEÑO DE VIDEOJUEGOS - U. GABRIELA MISTRAL
+    { acred: 4, gratuidad: false }, // DISEÑO EN ANIMACIÓN DIGITAL - U. GABRIELA MISTRAL
+    { acred: 4, gratuidad: true  }, // DISEÑO EN COMUNICACIÓN VISUAL - UTEM
+    { acred: 4, gratuidad: false }, // DISEÑO EN INTERACCIÓN DIGITAL - U. GABRIELA MISTRAL
+    { acred: 4, gratuidad: false }, // DISEÑO EN MARKETING DIGITAL - U. GABRIELA MISTRAL
+    { acred: 4, gratuidad: true  }, // DISEÑO INDUSTRIAL - UTEM
+    { acred: 5, gratuidad: true  }, // BACHILLERATO ARTES - U. FINIS TERRAE
+    { acred: 5, gratuidad: true  }, // DISEÑO - U. CATÓLICA DE TEMUCO
+    { acred: 5, gratuidad: true  }, // DISEÑO - U. DE LA SERENA
+    { acred: 5, gratuidad: true  }, // DISEÑO - U. DE LAS AMÉRICAS
+    { acred: 5, gratuidad: true  }, // DISEÑO - U. DE PLAYA ANCHA
+    { acred: 5, gratuidad: true  }, // DISEÑO DE MODA Y MANAGEMENT - U. FINIS TERRAE
+    { acred: 5, gratuidad: true  }, // DISEÑO - U. DE LAS AMÉRICAS (2a sede)
+    { acred: 5, gratuidad: true  }, // DISEÑO - U. FINIS TERRAE
+    { acred: 5, gratuidad: true  }, // DISEÑO GRÁFICO - U. DEL BÍO-BÍO
+    { acred: 5, gratuidad: false }, // DISEÑO GRÁFICO MENCIÓN ESTRATÉGICO - U. ANTOFAGASTA
+    { acred: 5, gratuidad: true  }, // DISEÑO INDUSTRIAL - U. DEL BÍO-BÍO
+    { acred: 5, gratuidad: true  }, // DISEÑO MENCIÓN - U. MAYOR
+    { acred: 5, gratuidad: true  }, // INGENIERÍA REALIDAD VIRTUAL - U. BERNARDO O'HIGGINS
+    { acred: 6, gratuidad: false }, // BACHILLERATO DISEÑO - U. DEL DESARROLLO
+    { acred: 6, gratuidad: true  }, // DISEÑO - U. AUSTRAL DE CHILE
+    { acred: 6, gratuidad: true  }, // DISEÑO - U. DE TALCA
+    { acred: 6, gratuidad: true  }, // DISEÑO - U. DE VALPARAÍSO
+    { acred: 6, gratuidad: false }, // DISEÑO DE JUEGOS DIGITALES - UNAB (Las Condes)
+    { acred: 6, gratuidad: false }, // DISEÑO DE JUEGOS DIGITALES - UNAB (Concepción)
+    { acred: 6, gratuidad: false }, // DISEÑO DE VESTUARIO Y TEXTIL - UNAB
+    { acred: 6, gratuidad: false }, // DISEÑO GRÁFICO - UNAB
+    { acred: 6, gratuidad: false }, // DISEÑO - U. DEL DESARROLLO (Santiago)
+    { acred: 6, gratuidad: false }, // DISEÑO - U. DEL DESARROLLO (Concepción)
+    { acred: 6, gratuidad: true  }, // DISEÑO - U. DIEGO PORTALES
+    { acred: 6, gratuidad: true  }, // DISEÑO MULTIMEDIA - U. DE TARAPACÁ
+    { acred: 6, gratuidad: true  }, // ING. EN DISEÑO DE PRODUCTOS - UTFSM
+    { acred: 6, gratuidad: false }, // ING. EN DISEÑO - U. ADOLFO IBÁÑEZ
+    { acred: 6, gratuidad: true  }, // ING. EN FABRICACIÓN Y DISEÑO - UTFSM
+    { acred: 7, gratuidad: true  }, // DISEÑO - U. DE CHILE
+    { acred: 7, gratuidad: true  }, // DISEÑO EN COMUNICACIÓN VISUAL - USACH
+    { acred: 7, gratuidad: true  }, // DISEÑO - PUC
+    { acred: 7, gratuidad: true  }, // DISEÑO - PUCV
+    { acred: 7, gratuidad: true  }, // DISEÑO INDUSTRIAL - USACH
+    { acred: 7, gratuidad: true  }, // DISEÑO TEATRAL - U. DE CHILE
 ];
 
-// Calcular promedio y cantidad por nivel
 const niveles = [3, 4, 5, 6, 7];
-const promedios = niveles.map(n => {
-    const grupo = rawData.filter(d => d.acred === n);
-    const suma = grupo.reduce((acc, d) => acc + d.arancel, 0);
-    return Math.round(suma / grupo.length);
-});
-const cantidades = niveles.map(n => rawData.filter(d => d.acred === n).length);
 
-// Colores que van de naranja claro a naranja oscuro según nivel
-const colores = [
-    "rgba(241,200,120,0.85)",
-    "rgba(241,170,70,0.85)",
-    "rgba(241,142,45,0.85)",
-    "rgba(220,100,30,0.85)",
-    "rgba(190,60,15,0.85)",
-];
+const conGratuidad    = niveles.map(n => gratuidad.filter(d => d.acred === n && d.gratuidad).length);
+const sinGratuidad    = niveles.map(n => gratuidad.filter(d => d.acred === n && !d.gratuidad).length);
+const totalesPorNivel = niveles.map(n => gratuidad.filter(d => d.acred === n).length);
 
 new Chart(document.getElementById("barras"), {
     type: "bar",
@@ -205,9 +193,16 @@ new Chart(document.getElementById("barras"), {
         labels: niveles.map(n => n + " años"),
         datasets: [
             {
-                label: "Arancel promedio",
-                data: promedios,
-                backgroundColor: colores,
+                label: "Con gratuidad",
+                data: conGratuidad,
+                backgroundColor: "rgba(190,60,15,0.85)",
+                borderRadius: 3,
+                borderSkipped: false,
+            },
+            {
+                label: "Sin gratuidad",
+                data: sinGratuidad,
+                backgroundColor: "rgba(241,200,120,0.7)",
                 borderRadius: 3,
                 borderSkipped: false,
             },
@@ -217,6 +212,7 @@ new Chart(document.getElementById("barras"), {
         responsive: true,
         scales: {
             x: {
+                stacked: true,
                 grid: { display: false },
                 border: { color: "#ccc" },
                 ticks: {
@@ -225,19 +221,32 @@ new Chart(document.getElementById("barras"), {
                 },
             },
             y: {
+                stacked: true,
                 grid: { color: "rgba(0,0,0,0.06)" },
                 border: { color: "#bbb", dash: [4, 4] },
                 ticks: {
+                    stepSize: 1,
                     font: { family: "'Georama', sans-serif", size: 11 },
                     color: "#999",
                     callback: function (value) {
-                        return "$ " + value.toLocaleString("es-CL");
+                        return Number.isInteger(value) ? value : null;
                     },
                 },
             },
         },
         plugins: {
-            legend: { display: false },
+            legend: {
+                display: true,
+                position: "top",
+                align: "end",
+                labels: {
+                    font: { family: "'Georama', sans-serif", size: 11 },
+                    color: "#666",
+                    boxWidth: 12,
+                    boxHeight: 12,
+                    padding: 16,
+                },
+            },
             tooltip: {
                 backgroundColor: "#fff",
                 borderColor: "#ddd",
@@ -252,11 +261,13 @@ new Chart(document.getElementById("barras"), {
                         return "Acreditación: " + items[0].label;
                     },
                     label: function (context) {
-                        const nivel = niveles[context.dataIndex];
-                        return [
-                            "Promedio: $ " + context.raw.toLocaleString("es-CL"),
-                            "Programas: " + cantidades[context.dataIndex],
-                        ];
+                        const n = niveles[context.dataIndex];
+                        const total = totalesPorNivel[context.dataIndex];
+                        const pct = Math.round((context.raw / total) * 100);
+                        return context.dataset.label + ": " + context.raw + " programas (" + pct + "%)";
+                    },
+                    footer: function (items) {
+                        return "Total: " + totalesPorNivel[items[0].dataIndex] + " programas";
                     },
                 },
             },
